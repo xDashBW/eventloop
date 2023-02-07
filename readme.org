@@ -1,3 +1,9 @@
+* 开发进度
+
+- [X] 完成基础的 eventloop, 支持 linux 平台
+- [ ] 实现各种 demo, 聊天, Dns 等
+- [ ] 开发 http-server, 实现 c10k 和添加留言版功能
+- [ ] 给 http-server 添加 python 扩展, 可以使用 python 实现简单的业务逻辑
 
 * eventloop 简介
   
@@ -30,15 +36,15 @@
 
   基本是 c 语言非常擅长处理的链队列
 
+  
   -------------------------------------------------------
 
    唤醒队列 :  event-->event-->event-->event-->event 
 
    fd 数组   :     [fd1,    fd2,    fd3,    fd4,   fd5,   fd6,]
-                    \|/     \|/     \|/
-                    event   event   event
-                    \|/     \|/     \|/
-                   event   event   event
+                   read   read     event
+                   write   write   event
+                   timer   timer   event
 --------------------------------------------------------------
   
   fd 数组使用 fd 作为下标, 在 linux 中打开的文件描述符号, 从 0 开始排序, 所以是可以的.
