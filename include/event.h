@@ -9,7 +9,7 @@ struct eventloop *eventloop_new();
 /**
    销毁 evnetloop
  */
-void eventloop_destory(struct eventloop *loop);
+void eventloop_delete(struct eventloop *loop);
 
 /**
    事件分发
@@ -31,20 +31,26 @@ typedef void (*callback)(int fd, short wake_event, void *user);
    @callback: 该事件唤醒时要执行的回调
  */
 struct watcher *watcher_new(int fd, short event, void *user, callback cb,
-                            struct eventloop *loop);
+			    struct eventloop *loop);
 
 /**
    把 watcher 注册到 eventloop 中
-   @eventloop: 调度 loop
    @wather: 事件
+   @eventloop: 调度 loop
  */
 void watcher_add(struct watcher *watcher, struct eventloop *loop);
 
 /**
    把 watcher 从 eventloop 中移除
-   @eventloop: 调度 loop
    @watcher: 事件
+   @eventloop: 调度 loop
  */
 void watcher_del(struct watcher *watcher, struct eventloop *loop);
+
+/**
+   销毁 watcher, 释放资源
+   @watcher: 事件
+ */
+void watcher_delete(struct watcher *watcher);
 
 #endif
