@@ -30,8 +30,7 @@ typedef void (*callback)(int fd, short wake_event, void *user);
    @event: 要监听的事件
    @callback: 该事件唤醒时要执行的回调
  */
-struct watcher *watcher_new(int fd, short event, void *user, callback cb,
-			    struct eventloop *loop);
+struct watcher *watcher_new(int fd, short event, void *user, callback cb, struct eventloop *loop);
 
 /**
    把 watcher 注册到 eventloop 中
